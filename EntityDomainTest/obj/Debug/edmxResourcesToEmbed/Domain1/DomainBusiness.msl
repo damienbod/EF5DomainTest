@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestDbModelStoreContainer" CdmEntityContainer="TestDbEntities">
+    <EntitySetMapping Name="County">
+      <EntityTypeMapping TypeName="TestDbModel.County">
+        <MappingFragment StoreEntitySet="County">
+          <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+          <ScalarProperty Name="CountyIso" ColumnName="CountyIso" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Area">
+      <EntityTypeMapping TypeName="TestDbModel.Area">
+        <MappingFragment StoreEntitySet="Area">
+          <ScalarProperty Name="Notiz" ColumnName="Notiz" />
+          <ScalarProperty Name="Homepage" ColumnName="Homepage" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Ort" ColumnName="Ort" />
+          <ScalarProperty Name="Plz" ColumnName="Plz" />
+          <ScalarProperty Name="Postfach" ColumnName="Postfach" />
+          <ScalarProperty Name="Strasse" ColumnName="Strasse" />
+          <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+          <ScalarProperty Name="ParentAreaId" ColumnName="ParentAreaId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkflowStatus">
+      <EntityTypeMapping TypeName="TestDbModel.WorkflowStatus">
+        <MappingFragment StoreEntitySet="WorkflowStatus">
+          <ScalarProperty Name="Archiviert" ColumnName="Archiviert" />
+          <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+          <ScalarProperty Name="Completed" ColumnName="Completed" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="WorkflowItemKey" ColumnName="WorkflowItemKey" />
+          <ScalarProperty Name="WorkflowStatusType" ColumnName="WorkflowStatusType" />
+          <ScalarProperty Name="ParentWorkflowStatusId" ColumnName="ParentWorkflowStatusId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

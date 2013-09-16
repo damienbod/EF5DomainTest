@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TestDbModelStoreContainer">
+          <EntitySet Name="Area" EntityType="TestDbModel.Store.Area" store:Type="Tables" Schema="Domain1" />
+          <EntitySet Name="County" EntityType="TestDbModel.Store.County" store:Type="Tables" Schema="Domain1" />
+          <EntitySet Name="WorkflowStatus" EntityType="TestDbModel.Store.WorkflowStatus" store:Type="Tables" Schema="Domain1" />
+          <AssociationSet Name="FK_WorkflowStatus_AreaId" Association="TestDbModel.Store.FK_WorkflowStatus_AreaId">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="WorkflowStatus" EntitySet="WorkflowStatus" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ParentAreaId" Type="int" />
+          <Property Name="AreaName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Strasse" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Postfach" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Plz" Type="int" Nullable="false" />
+          <Property Name="Ort" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Fax" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Homepage" Type="nvarchar(max)" />
+          <Property Name="Notiz" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="County">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CountyIso" Type="varchar" Nullable="false" MaxLength="2" />
+          <Property Name="CountyName" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="WorkflowStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ParentWorkflowStatusId" Type="int" />
+          <Property Name="WorkflowStatusType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WorkflowItemKey" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Completed" Type="datetime" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="Archiviert" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_WorkflowStatus_AreaId">
+          <End Role="Area" Type="TestDbModel.Store.Area" Multiplicity="1" />
+          <End Role="WorkflowStatus" Type="TestDbModel.Store.WorkflowStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowStatus">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestDbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="County" EntityType="TestDbModel.County" />
+          <EntitySet Name="Area" EntityType="TestDbModel.Area" />
+          <EntitySet Name="WorkflowStatus" EntityType="TestDbModel.WorkflowStatus" />
+          <AssociationSet Name="FK_WorkflowStatus_AreaId" Association="TestDbModel.FK_WorkflowStatus_AreaId">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="WorkflowStatus" EntitySet="WorkflowStatus" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="County">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CountyIso" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CountyName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ParentAreaId" />
+          <Property Type="String" Name="AreaName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Strasse" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Postfach" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Plz" Nullable="false" />
+          <Property Type="String" Name="Ort" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Telefon" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Fax" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Homepage" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Notiz" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WorkflowStatus" Relationship="TestDbModel.FK_WorkflowStatus_AreaId" FromRole="Area" ToRole="WorkflowStatus" />
+        </EntityType>
+        <EntityType Name="WorkflowStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ParentWorkflowStatusId" />
+          <Property Type="String" Name="WorkflowStatusType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="WorkflowItemKey" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="Completed" Precision="3" />
+          <Property Type="Int32" Name="AreaId" Nullable="false" />
+          <Property Type="Boolean" Name="Archiviert" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="TestDbModel.FK_WorkflowStatus_AreaId" FromRole="WorkflowStatus" ToRole="Area" />
+        </EntityType>
+        <Association Name="FK_WorkflowStatus_AreaId">
+          <End Type="TestDbModel.Area" Role="Area" Multiplicity="1" />
+          <End Type="TestDbModel.WorkflowStatus" Role="WorkflowStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowStatus">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestDbModelStoreContainer" CdmEntityContainer="TestDbEntities">
+          <EntitySetMapping Name="County">
+            <EntityTypeMapping TypeName="TestDbModel.County">
+              <MappingFragment StoreEntitySet="County">
+                <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+                <ScalarProperty Name="CountyIso" ColumnName="CountyIso" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Area">
+            <EntityTypeMapping TypeName="TestDbModel.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="Notiz" ColumnName="Notiz" />
+                <ScalarProperty Name="Homepage" ColumnName="Homepage" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="Plz" ColumnName="Plz" />
+                <ScalarProperty Name="Postfach" ColumnName="Postfach" />
+                <ScalarProperty Name="Strasse" ColumnName="Strasse" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="ParentAreaId" ColumnName="ParentAreaId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowStatus">
+            <EntityTypeMapping TypeName="TestDbModel.WorkflowStatus">
+              <MappingFragment StoreEntitySet="WorkflowStatus">
+                <ScalarProperty Name="Archiviert" ColumnName="Archiviert" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="WorkflowItemKey" ColumnName="WorkflowItemKey" />
+                <ScalarProperty Name="WorkflowStatusType" ColumnName="WorkflowStatusType" />
+                <ScalarProperty Name="ParentWorkflowStatusId" ColumnName="ParentWorkflowStatusId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

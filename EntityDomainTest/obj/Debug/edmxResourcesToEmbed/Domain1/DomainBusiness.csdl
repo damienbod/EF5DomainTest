@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TestDbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="County" EntityType="TestDbModel.County" />
+    <EntitySet Name="Area" EntityType="TestDbModel.Area" />
+    <EntitySet Name="WorkflowStatus" EntityType="TestDbModel.WorkflowStatus" />
+    <AssociationSet Name="FK_WorkflowStatus_AreaId" Association="TestDbModel.FK_WorkflowStatus_AreaId">
+      <End Role="Area" EntitySet="Area" />
+      <End Role="WorkflowStatus" EntitySet="WorkflowStatus" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="County">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CountyIso" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CountyName" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ParentAreaId" />
+    <Property Type="String" Name="AreaName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Strasse" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Postfach" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Plz" Nullable="false" />
+    <Property Type="String" Name="Ort" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Telefon" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Fax" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Homepage" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Notiz" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WorkflowStatus" Relationship="TestDbModel.FK_WorkflowStatus_AreaId" FromRole="Area" ToRole="WorkflowStatus" />
+  </EntityType>
+  <EntityType Name="WorkflowStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ParentWorkflowStatusId" />
+    <Property Type="String" Name="WorkflowStatusType" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="WorkflowItemKey" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="Completed" Precision="3" />
+    <Property Type="Int32" Name="AreaId" Nullable="false" />
+    <Property Type="Boolean" Name="Archiviert" Nullable="false" />
+    <NavigationProperty Name="Area" Relationship="TestDbModel.FK_WorkflowStatus_AreaId" FromRole="WorkflowStatus" ToRole="Area" />
+  </EntityType>
+  <Association Name="FK_WorkflowStatus_AreaId">
+    <End Type="TestDbModel.Area" Role="Area" Multiplicity="1" />
+    <End Type="TestDbModel.WorkflowStatus" Role="WorkflowStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Area">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkflowStatus">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

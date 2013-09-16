@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDbModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestDbModel1StoreContainer">
+    <EntitySet Name="Category" EntityType="TestDbModel1.Store.Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CategoryLog" EntityType="TestDbModel1.Store.CategoryLog" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ELMAH_Error" EntityType="TestDbModel1.Store.ELMAH_Error" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Log" EntityType="TestDbModel1.Store.Log" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CategoryLog_Category" Association="TestDbModel1.Store.FK_CategoryLog_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="CategoryLog" EntitySet="CategoryLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryLog_Log" Association="TestDbModel1.Store.FK_CategoryLog_Log">
+      <End Role="Log" EntitySet="Log" />
+      <End Role="CategoryLog" EntitySet="CategoryLog" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="CategoryLog">
+    <Key>
+      <PropertyRef Name="CategoryLogID" />
+    </Key>
+    <Property Name="CategoryLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="LogID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ELMAH_Error">
+    <Key>
+      <PropertyRef Name="ErrorId" />
+    </Key>
+    <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Application" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="Host" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Source" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="User" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="StatusCode" Type="int" Nullable="false" />
+    <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+    <Property Name="Sequence" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AllXml" Type="ntext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Name="LogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="EventID" Type="int" />
+    <Property Name="Priority" Type="int" Nullable="false" />
+    <Property Name="Severity" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Timestamp" Type="datetime" Nullable="false" />
+    <Property Name="MachineName" Type="nvarchar" Nullable="false" MaxLength="32" />
+    <Property Name="AppDomainName" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="ProcessID" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="ProcessName" Type="nvarchar" Nullable="false" MaxLength="512" />
+    <Property Name="ThreadName" Type="nvarchar" MaxLength="512" />
+    <Property Name="Win32ThreadId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Message" Type="nvarchar" MaxLength="1500" />
+    <Property Name="FormattedMessage" Type="ntext" />
+  </EntityType>
+  <Association Name="FK_CategoryLog_Category">
+    <End Role="Category" Type="TestDbModel1.Store.Category" Multiplicity="1" />
+    <End Role="CategoryLog" Type="TestDbModel1.Store.CategoryLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="CategoryLog">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryLog_Log">
+    <End Role="Log" Type="TestDbModel1.Store.Log" Multiplicity="1" />
+    <End Role="CategoryLog" Type="TestDbModel1.Store.CategoryLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Log">
+        <PropertyRef Name="LogID" />
+      </Principal>
+      <Dependent Role="CategoryLog">
+        <PropertyRef Name="LogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

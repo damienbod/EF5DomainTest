@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDbModel1" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TestDbEntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="ELMAH_Error" EntityType="TestDbModel1.ELMAH_Error" />
+    <EntitySet Name="Category" EntityType="TestDbModel1.Category" />
+    <EntitySet Name="CategoryLog" EntityType="TestDbModel1.CategoryLog" />
+    <EntitySet Name="Log" EntityType="TestDbModel1.Log" />
+    <AssociationSet Name="FK_CategoryLog_Category" Association="TestDbModel1.FK_CategoryLog_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="CategoryLog" EntitySet="CategoryLog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryLog_Log" Association="TestDbModel1.FK_CategoryLog_Log">
+      <End Role="Log" EntitySet="Log" />
+      <End Role="CategoryLog" EntitySet="CategoryLog" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ELMAH_Error">
+    <Key>
+      <PropertyRef Name="ErrorId" />
+    </Key>
+    <Property Type="Guid" Name="ErrorId" Nullable="false" />
+    <Property Type="String" Name="Application" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Host" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Type" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Source" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Message" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="User" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="StatusCode" Nullable="false" />
+    <Property Type="DateTime" Name="TimeUtc" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="Sequence" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="AllXml" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Type="Int32" Name="CategoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CategoryLog" Relationship="TestDbModel1.FK_CategoryLog_Category" FromRole="Category" ToRole="CategoryLog" />
+  </EntityType>
+  <EntityType Name="CategoryLog">
+    <Key>
+      <PropertyRef Name="CategoryLogID" />
+    </Key>
+    <Property Type="Int32" Name="CategoryLogID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CategoryID" Nullable="false" />
+    <Property Type="Int32" Name="LogID" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="TestDbModel1.FK_CategoryLog_Category" FromRole="CategoryLog" ToRole="Category" />
+    <NavigationProperty Name="Log" Relationship="TestDbModel1.FK_CategoryLog_Log" FromRole="CategoryLog" ToRole="Log" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="LogID" />
+    </Key>
+    <Property Type="Int32" Name="LogID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="EventID" />
+    <Property Type="Int32" Name="Priority" Nullable="false" />
+    <Property Type="String" Name="Severity" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Timestamp" Nullable="false" Precision="3" />
+    <Property Type="String" Name="MachineName" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="AppDomainName" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ProcessID" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ProcessName" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ThreadName" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Win32ThreadId" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Message" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FormattedMessage" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CategoryLog" Relationship="TestDbModel1.FK_CategoryLog_Log" FromRole="Log" ToRole="CategoryLog" />
+  </EntityType>
+  <Association Name="FK_CategoryLog_Category">
+    <End Type="TestDbModel1.Category" Role="Category" Multiplicity="1" />
+    <End Type="TestDbModel1.CategoryLog" Role="CategoryLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="CategoryLog">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryLog_Log">
+    <End Type="TestDbModel1.Log" Role="Log" Multiplicity="1" />
+    <End Type="TestDbModel1.CategoryLog" Role="CategoryLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Log">
+        <PropertyRef Name="LogID" />
+      </Principal>
+      <Dependent Role="CategoryLog">
+        <PropertyRef Name="LogID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

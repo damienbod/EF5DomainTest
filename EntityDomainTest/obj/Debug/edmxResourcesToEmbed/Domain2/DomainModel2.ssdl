@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDbModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestDbModel1StoreContainer">
+    <EntitySet Name="County" EntityType="TestDbModel1.Store.County" store:Type="Tables" Schema="Domain2" />
+  </EntityContainer>
+  <EntityType Name="County">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CountyIso" Type="varchar" Nullable="false" MaxLength="2" />
+    <Property Name="CountyName" Type="varchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,8 @@
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\bin\Debug\EntityDomainTest.dll.config
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\bin\Debug\EntityDomainTest.dll
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\bin\Debug\EntityDomainTest.pdb
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\bin\Debug\EntityFramework.dll
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\bin\Debug\EntityFramework.xml
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\obj\Debug\EntityDomainTest.dll
+c:\users\dbo0256.garaio\documents\visual studio 2012\Projects\EntityDomainTest\EntityDomainTest\obj\Debug\EntityDomainTest.pdb
+C:\Users\dbo0256.GARAIO\Documents\Visual Studio 2012\Projects\EntityDomainTest\EntityDomainTest\obj\Debug\EntityDomainTest.csprojResolveAssemblyReference.cache
